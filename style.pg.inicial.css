@@ -1,0 +1,146 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+}
+
+/* Corpo da página */
+body {
+  background-color: #E8F5E9; /* Verde claro suave */
+  color: #1B5E20; /* Verde escuro para texto */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background: white;
+  color: #1B5E20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #cde4d0;
+}
+
+.logo {
+  height: 35px;
+}
+
+.info-container {
+  text-align: right;
+}
+
+.doctor-name {
+  font-weight: 600;
+  font-size: 1rem;
+  display: block;
+}
+
+.datetime {
+  font-size: 0.9rem;
+  color: #388E3C;
+}
+
+/* Menu de navegação */
+.nav-menu {
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #cde4d0;
+}
+
+.nav-link {
+  color: #1B5E20;
+  text-decoration: none;
+  margin: 0 1.2rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #388E3C;
+}
+
+/* Conteúdo principal */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+
+.welcome {
+  background-color: #FFFFFF;
+  padding: 2.5rem 2rem;
+  border-radius: 14px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.welcome h2 {
+  color: #1B5E20;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.welcome p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+/* Botão principal */
+.btn {
+  background: #43A047; /* Verde forte porém suave */
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #388E3C; /* Versão mais escura no hover */
+}
+
+/* Rodapé */
+.footer {
+  background-color: #FFFFFF;
+  color: #388E3C;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.95rem;
+  border-top: 1px solid #cde4d0;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .info-container {
+    text-align: center;
+  }
+}

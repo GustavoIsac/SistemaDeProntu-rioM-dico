@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.pagcad.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8370/8370525.png" type="image/png">
+    <title>Prontuario Hospital Lutz</title>
+</head>
+<body>
+    <header id="topo">
+        <div id="topoimg">
+            <div class="titulo-sistema">
+                <h1>Prontuário Médico Hospital Lutz Central</h1>
+                <p class="subtitulo">Sistema de Atendimento e Cadastro</p>
+            </div>
+        </div>
+        <div id="horario"></div> <!-- Aqui vai o relógio -->
+    </header>
+
+
+
+    <main>
+        <form id="formPaciente">
+            <div class="class1">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome">
+            </div>
+
+            <div class="class1">
+                <label for="Idade">Data de nascimento:</label>
+                <input type="date" id="data-nascimento">
+            </div>
+
+            <div class="class1">
+                <label for="cpf">Cpf:</label>
+                <input placeholder="123.456.789.01" type="number" id="cpf" name="cpf">
+            </div>
+
+            <div class="class1">
+                <label>Sexo:</label>
+                <div class="classSexo">
+                    <label><input type="radio" name="sexo" value="Masculino"> Masculino</label>
+                    <label><input type="radio" name="sexo" value="Feminino"> Feminino</label>
+                    <label><input type="radio" name="sexo" value="Outro"> Outros</label>
+                </div>
+            </div>
+
+            <div class="class1">
+                <label for="grau-urgencia">Grau de Urgência:</label>
+                <select id="grau-urgencia" name="grau-urgencia">
+                    <option value="Vermelho - Emergência">🟥 Vermelho - Emergência</option>
+                    <option value="Laranja - Muito Urgente">🟧 Laranja - Muito Urgente</option>
+                    <option value="Amarelo - Urgente">🟨 Amarelo - Urgente</option>
+                    <option value="Verde - Pouco Urgente">🟩 Verde - Pouco Urgente</option>
+                    <option value="Azul - Não Urgente" selected>🟦 Azul - Não Urgente</option>
+                </select>
+            </div>
+
+            <div class="class1">
+                <label for="estadoCivil">Estado Civil:</label>
+                <select id="estadoCivil" name="estadoCivil">
+                    <option value="">Selecione</option>
+                    <option value="Solteiro(a)">Solteiro(a)</option>
+                    <option value="Casado(a)">Casado(a)</option>
+                    <option value="Viúvo(a)">Viúvo(a)</option>
+                    <option value="Divorciado(a)">Divorciado(a)</option>
+                </select>
+            </div>
+
+            <div class="class1">
+                <label for="profissao">Profissão:</label>
+                <input type="text" id="profissao" name="profissao">
+            </div>
+
+            <div class="class1">
+                <label>Possui doenças crônicas ou comorbidades?</label>
+                <div>
+                    <label><input type="radio" name="comorbidades" value="Sim"> Sim</label>
+                    <label><input type="radio" name="comorbidades" value="Não" checked> Não</label>
+                </div>
+                <textarea id="campoComorbidades" placeholder="Descreva as comorbidades..." style="display:none;" rows="2"></textarea>
+            </div>
+
+            <div class="class1">
+                <label>Alergias a medicamentos ou remédios?</label>
+                <div>
+                    <label><input type="radio" name="alergias" value="Sim"> Sim</label>
+                    <label><input type="radio" name="alergias" value="Não" checked> Não</label>
+                </div>
+                <textarea id="campoAlergias" placeholder="Descreva as alergias..." style="display:none;" rows="2"></textarea>
+            </div>
+
+            <div class="class1">
+                <label for="dataHoraEntrada">Data e hora da entrada:</label>
+                <input type="text" id="dataHoraEntrada" readonly>
+            </div>
+
+            <div class="class1" id="campoResponsavel" style="display:none;">
+                <label for="nomeResponsavel">Nome do responsável:</label>
+                <input type="text" id="nomeResponsavel" name="nomeResponsavel">
+                <label for="telefoneResponsavel">Telefone do responsável:</label>
+                <input type="text" id="telefoneResponsavel" name="telefoneResponsavel">
+            </div>
+
+            <div class="class1">
+                <label for="Sintomas">Sintomas</label>
+                <textarea id="sintomas" name="sintomas" rows="3"></textarea>
+            </div>
+
+           <button type="submit" id="Buttonfinalizarcad">Salvar</button>
+
+            
+        </form>
+
+        <div id="buscarpaciente">
+            <label for="busca">Pesquisar</label>
+            <input type="text" id="busca" placeholder="Digite o nome do paciente...">
+        </div>
+
+        <div>
+            <table id="tabeladadosuser">
+                <tr>
+                    <th>nome</th>
+                    <th>idade</th>
+                    <th>Ações</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <script src="script.pgcad.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cabeçalho */
+.header {
+  background: #c9c9c9; /* cinza claro esverdeado */
+  color: #2f5d3e; /* verde natureza escuro */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 3px 8px rgba(47, 93, 62, 0.15);
+  border-bottom: 1px solid #c5d3c5;
+  border-radius: 0 0 0px 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container do logo e botão voltar alinhados à esquerda */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo */
+.logo {
+  height: 30px;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.08));
+}
+
+/* Botão voltar estilizado e reposicionado */
+.botao-voltar {
+  background-color: #9BBFB5; /* verde natureza suave */
+  color: #1f3a1f;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(31,58,31,0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.botao-voltar:hover {
+  background-color: #709b7d;
+  box-shadow: 0 3px 10px rgba(31,58,31,0.3);
+}
+
+/* Container das informações do médico e horário */
+.info-container {
+  text-align: right;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  min-width: 180px;
+}
+
+/* Nome do médico */
+.doctor-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.15rem;
+  color: #2f5d3e;
+}
+
+/* Data e hora */
+.datetime {
+  font-size: 0.85rem;
+  color: #3a6a41;
+  font-style: italic;
+}
+
+/* Main e tabela (igual ao seu original) */
+main {
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #9BBFB5;
+}
+
+button {
+  background-color: #12594C;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:nth-child(3) {
+  background-color: #d9534f;
+}
+
+button:nth-child(3):hover {
+  background-color: #c9302c;
+}

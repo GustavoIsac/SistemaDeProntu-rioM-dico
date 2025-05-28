@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hospital Lutz</title>
+  <link rel="stylesheet" href="style.pg.inicial.css" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8370/8370525.png" type="image/png">
+
+
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="Img.Promp/logo hospital.png" alt="Logo Helvetic" class="logo" />
+    </div>
+    <div class="info-container">
+      <span class="doctor-name">Dr(a). adolfo lutz</span>
+      <time id="datetime" class="datetime"></time>
+    </div>
+  </header>
+
+  <nav class="nav-menu">
+    <a href="index.pg.inicial.html" class="nav-link active">Início</a>
+    <a href="index.pg.fichas.html" class="nav-link">Prontuários Salvos</a>
+    <a href="#" class="nav-link">Sistema</a>
+  </nav>
+
+  <main class="main-content">
+    <section class="welcome">
+      <h2>Prontuário Médico-Hospitalar</h2>
+      <p>Para iniciar um novo prontuário médico, clique no botão abaixo.</p>
+      <button class="btn" onclick="location.href='index.pgcad.html'">Iniciar Novo Prontuário</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Sistema lock • Versão 1.1.3 • Compatível com Windows / navegadores modernos</p>
+  </footer>
+
+  <script>
+    function updateDateTime() {
+      const dtElem = document.getElementById('datetime');
+      const now = new Date();
+      const date = now.toLocaleDateString('pt-BR', { weekday:'short', day:'2-digit', month:'short', year:'numeric' });
+      const time = now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+      dtElem.textContent = `${date} • ${time}`;
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+  </script>
+</body>
+</html>
