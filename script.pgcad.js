@@ -7,8 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const campoResponsavel = document.getElementById("campoResponsavel");
     const dataHoraEntrada = document.getElementById("dataHoraEntrada");
 
-    
-
     function salvarPacientes(pacientes) {
         localStorage.setItem('pacientes', JSON.stringify(pacientes));
     }
@@ -27,6 +25,25 @@ document.addEventListener("DOMContentLoaded", function () {
             idade--;
         }
         return idade;
+    }
+
+    function idadeValida(dataNascimento) {
+        const idade = calcularIdade(dataNascimento);
+        return idade <= 135;
+    }
+
+    function validarIdadeMaxima() {
+        const inputData = document.getElementById("data-nascimento");
+        inputData.addEventListener("blur", function () {
+            if (this.value.length === 10) {
+                const idade = calcularIdade(this.value);
+                if (idade > 135) {
+                    alert("Idade inválida. O sistema não aceita pacientes com mais de 135 anos.");
+                    this.value = "";
+                    this.focus();
+                }
+            }
+        });
     }
 
     function atualizarHorario() {
@@ -61,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     dataHoraEntrada.value = new Date().toLocaleString();
-
     let pacientes = carregarPacientes();
 
     function adicionarPacienteTabela(paciente) {
@@ -78,7 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const botaoDetalhes = document.createElement("button");
         botaoDetalhes.textContent = "Ver Detalhes";
         botaoDetalhes.classList.add("button");
-
         botaoDetalhes.addEventListener("click", function () {
             alert(
                 `Nome: ${paciente.nome}\n` +
@@ -100,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
         botaoEditar.textContent = "Editar";
         botaoEditar.classList.add("button");
         botaoEditar.style.marginLeft = "10px";
-
         botaoEditar.addEventListener("click", function () {
             document.getElementById("nome").value = paciente.nome;
             document.getElementById("data-nascimento").value = paciente.dataNascimento;
@@ -146,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function () {
         botaoApagar.textContent = "Apagar";
         botaoApagar.classList.add("button");
         botaoApagar.style.marginLeft = "10px";
-
         botaoApagar.addEventListener("click", function () {
             const confirmacao = confirm(`Tem certeza que deseja apagar a ficha de ${paciente.nome}?`);
             if (confirmacao) {
@@ -163,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
         novaLinha.appendChild(colunaNome);
         novaLinha.appendChild(colunaIdade);
         novaLinha.appendChild(colunaAcoes);
-
         tabela.appendChild(novaLinha);
     }
 
@@ -171,34 +183,29 @@ document.addEventListener("DOMContentLoaded", function () {
         adicionarPacienteTabela(paciente);
     });
 
-        form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const nome = document.getElementById("nome").value;
         const dataNascimento = document.getElementById("data-nascimento").value;
         const cpf = document.getElementById("cpf").value;
-
-        // ✅ VALIDAÇÃO DE CPF COMPLETO
-        if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf)) {
-            alert("Por favor, preencha o CPF corretamente com todos os números (ex: 000.000.000-00).");
-            return;
-        }
-
         const sintomas = document.getElementById("sintomas").value;
         const grauUrgencia = document.getElementById("grau-urgencia").value;
         const sexoSelecionado = document.querySelector('input[name="sexo"]:checked');
         const sexo = sexoSelecionado ? sexoSelecionado.value : "Não informado";
 
         const idade = calcularIdade(dataNascimento);
+        if (!idadeValida(dataNascimento)) {
+            alert("Cadastro não permitido. A idade ultrapassa o limite de 135 anos.");
+            return;
+        }
+
         const estadoCivil = document.getElementById("estadoCivil").value;
         const profissao = document.getElementById("profissao").value;
-
         const comorbidade = document.querySelector('input[name="comorbidades"]:checked').value;
         const textoComorbidade = comorbidade === "Sim" ? campoComorbidades.value : "Nenhuma";
-
         const alergia = document.querySelector('input[name="alergias"]:checked').value;
         const textoAlergia = alergia === "Sim" ? campoAlergias.value : "Nenhuma";
-
         const dataEntrada = dataHoraEntrada.value;
 
         let nomeResponsavel = "";
@@ -209,7 +216,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const idPaciente = Date.now() + Math.floor(Math.random() * 1000);
-
         const paciente = {
             id: idPaciente,
             nome,
@@ -241,10 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dataHoraEntrada.value = new Date().toLocaleString();
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
     const pacienteEditandoId = localStorage.getItem("pacienteEditandoId");
-    let pacientes = JSON.parse(localStorage.getItem("pacientes")) || [];
-
     if (pacienteEditandoId) {
         const pacienteParaEditar = pacientes.find(p => p.id == pacienteEditandoId);
         if (pacienteParaEditar) {
@@ -253,50 +256,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    const form = document.getElementById("formPaciente");
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const novoPaciente = capturarDadosDoFormulario();
-        if (!novoPaciente) return;
-
-        if (pacienteEditandoId) {
-            // Atualiza ficha existente
-            pacientes = pacientes.map(p => p.id == pacienteEditandoId ? novoPaciente : p);
-            localStorage.removeItem("pacienteEditandoId");
-        } else {
-            // Cria ficha nova
-            pacientes.push(novoPaciente);
-        }
-
-        localStorage.setItem("pacientes", JSON.stringify(pacientes));
-        window.location.href = "fichas.html";
-    });
-    });
-
-    const campoCPF = document.getElementById("cpf");
-
-    campoCPF.addEventListener("input", function (e) {
-        let valor = e.target.value;
-
-        // Remove tudo que não for número
-        valor = valor.replace(/\D/g, "");
-
-        // Aplica a máscara de CPF
-        if (valor.length > 3 && valor.length <= 6) {
-            valor = valor.replace(/(\d{3})(\d+)/, "$1.$2");
-        } else if (valor.length > 6 && valor.length <= 9) {
-            valor = valor.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
-        } else if (valor.length > 9) {
-            valor = valor.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "$1.$2.$3-$4");
-        }
-
-        // Limita o número máximo de caracteres
-        valor = valor.substring(0, 14);
-
-        e.target.value = valor;
-    });
-
-    
-
+    validarIdadeMaxima();
 });
