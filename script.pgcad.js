@@ -171,12 +171,19 @@ document.addEventListener("DOMContentLoaded", function () {
         adicionarPacienteTabela(paciente);
     });
 
-    form.addEventListener("submit", function (event) {
+        form.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const nome = document.getElementById("nome").value;
         const dataNascimento = document.getElementById("data-nascimento").value;
         const cpf = document.getElementById("cpf").value;
+
+        // ✅ VALIDAÇÃO DE CPF COMPLETO
+        if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf)) {
+            alert("Por favor, preencha o CPF corretamente com todos os números (ex: 000.000.000-00).");
+            return;
+        }
+
         const sintomas = document.getElementById("sintomas").value;
         const grauUrgencia = document.getElementById("grau-urgencia").value;
         const sexoSelecionado = document.querySelector('input[name="sexo"]:checked');
@@ -233,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
         campoResponsavel.style.display = "none";
         dataHoraEntrada.value = new Date().toLocaleString();
     });
+
     document.addEventListener("DOMContentLoaded", function () {
     const pacienteEditandoId = localStorage.getItem("pacienteEditandoId");
     let pacientes = JSON.parse(localStorage.getItem("pacientes")) || [];
